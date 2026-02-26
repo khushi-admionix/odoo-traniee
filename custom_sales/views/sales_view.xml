@@ -1,0 +1,41 @@
+<odoo>
+    <record id="sales_view_list_inherit" model="ir.ui.view">
+        <field name="name">"sale.order.list"</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+        <xpath expr="//list//field[@name='partner_id']" position="after">
+            <field name="customer_email" column_invisible="1"/>
+        </xpath>
+    </field>
+    </record>
+    <record id="Sales_view_form_inheit_aa" model="ir.ui.view">
+        <field name="name">"sale.order.form.inherit.custom"</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form//field[@name='partner_id']" position="after">
+                <field name="customer_email"/>
+            </xpath>
+            <xpath expr="//form//field[@name='customer_email']" position="after">
+                <field name="active" widget="boolean_toggle"/>
+            </xpath>
+            <xpath expr="//form//field[@name='payment_term_id']" position="after">
+                <field name="ratings" widget="priority"/>
+            </xpath>
+
+            <xpath expr="//form//field[@name='ratings']" position="after">
+                <field name="payment_method1" widget="radio"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_create': True,'no_create_edit':True}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+        <menuitem id="sale.sale_menu_root"
+             name="custom_sales"/>
+
+
+</odoo>

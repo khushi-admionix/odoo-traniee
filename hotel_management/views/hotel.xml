@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- HOTEL MANAGEMENT LIST VIEW -->
+        <record id="hotel_management_view_list" model="ir.ui.view">
+            <field name="name">hotel.management.list</field>
+            <field name="model">hotel.management</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="address"/>
+                    <field name="email"/>
+                    <field name="age"/>
+                    <field name="phone"/>
+                    <field name="amount"/>
+                    <field name="deposit"/>
+                    <field name="amount_paid"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- HOTEL MANAGEMENT FORM VIEW -->
+        <record id="hotel_management_view_form" model="ir.ui.view">
+            <field name="name">hotel.management.form</field>
+            <field name="model">hotel.management</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    <button name="hotel_management.action_appointment_wizard"
+                            type="action"
+                            string="hotel appointment"
+                            class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="address"/>
+                            <field name="email"/>
+                            <field name="age"/>
+                            <field name="phone"/>
+                            <field name="amount"/>
+                            <field name="deposit"/>
+                            <field name="amount_paid"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+        <record id="search_hotel_management" model="ir.ui.view">
+            <field name="name">hotel.management.search</field>
+            <field name="model">hotel.management</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Age > 18" name="age1" domain="[('age','>',18)]"/>
+                    <filter string="Amount Paid" name="amount_paid" domain="[('amount_paid','>',1000)]"/>
+                    <filter string="Active" name="is_active" context="{'group_by':'is_active'}"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="action_hotel_management" model="ir.actions.act_window">
+            <field name="name">Taj Hotel</field>
+            <field name="res_model">hotel.management</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="search_hotel_management"/>
+            <field name="context">{'search_default_age1': 1}</field>
+        </record>
+
+        <!-- HOTEL ROOM LIST VIEW -->
+        <record id="hotel_room_view_list" model="ir.ui.view">
+            <field name="name">hotel.room.list</field>
+            <field name="model">hotel.room</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="Id_proof"/>
+                    <field name="checking_time"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- HOTEL ROOM FORM VIEW -->
+        <record id="hotel_room_view_form" model="ir.ui.view">
+            <field name="name">hotel.room.form</field>
+            <field name="model">hotel.room</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="Id_proof"/>
+                            <field name="checking_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hotel_appointment_view_wizard" model="ir.ui.view">
+            <field name="name">hotel.appointment.wizard.form</field>
+            <field name="model">hotel.appointment.wizard</field>
+            <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="checking_time"/>
+                            </group>
+                            <footer>
+                                <button name="create_appoinment"
+                                        type="object"
+                                        string="Save"
+                                        class="btn-primary"/>
+                            </footer>
+                        </sheet>
+                    </form>
+            </field>
+        </record>
+        <record id="action_appointment_wizard" model="ir.actions.act_window">
+            <field name="name">Hotel Appointment</field>
+            <field name="res_model">hotel.appointment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!-- HOTEL ROOM ACTION -->
+        <record id="action_hotel_room" model="ir.actions.act_window">
+            <field name="name">ID Proof</field>
+            <field name="res_model">hotel.room</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+
+        <!-- MENUS -->
+        <menuitem id="menu_hotel_management_root"
+                  name="Hotel Management"
+                  sequence="10"/>
+
+        <menuitem id="menu_hotel_management"
+                  name="Hotel Records"
+                  parent="menu_hotel_management_root"
+                  action="action_hotel_management"
+                  sequence="1"/>
+
+        <menuitem id="menu_hotel_room"
+                  name="ID Proof"
+                  parent="menu_hotel_management_root"
+                  action="action_hotel_room"
+                  sequence="2"/>
+
+    </data>
+</odoo>
