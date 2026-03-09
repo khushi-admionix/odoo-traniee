@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Visit Sequence -->
+        <record id="sequence_pet_visit" model="ir.sequence">
+            <field name="name">pet.visit</field>
+            <field name="code">pet.visit</field>
+            <field name="prefix">VIS/%(year)s</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

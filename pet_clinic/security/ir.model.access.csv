@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pet_owner_pet_owner,pet_clinic.pet_owner,model_pet_owner,base.group_user,1,1,1,1
+access_pet_pet_pet_pet,pet_clinic.pet_pet,model_pet_pet,base.group_user,1,1,1,1
+access_pet_visit_pet_visit,pet_clinic.pet_visit,model_pet_visit,base.group_user,1,1,1,1

@@ -1,0 +1,74 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_library_borrow_list" model="ir.ui.view">
+        <field name="name">library.borrow.list</field>
+        <field name="model">library.borrow</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="member_id"/>
+                <field name="book_id"/>
+                <field name="borrow_date"/>
+                <field name="return_date"/>
+                <field name="actual_return_date"/>
+                <field name="fine_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <!--Form View-->
+
+    <record id="view_library_borrow_form" model="ir.ui.view">
+        <field name="name">library.borrow.form</field>
+        <field name="model">library.borrow</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,issued,returned,late"/>
+                    <button name="action_issue" string="Issue" class="btn-primary" type="object" />
+                    <button name="action_confirm_return" string="Returned" class="btn-primary" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="member_id"/>
+                        <field name="book_id"/>
+                        <field name="has_subscription" readonly="1"/>
+                        <field name="subscription_expiry" readonly="1"/>
+                        <field name="borrow_date"/>
+                        <field name="return_date"/>
+                        <field name="actual_return_date"/>
+                        <field name="fine_amount" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    <-Search View-->
+    <record id="view_library_borrow_search" model="ir.ui.view">
+        <field name="name">library.borrow.search</field>
+        <field name="model">library.borrow</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="issued" string="Issued" domain="[('state','=','issued')]"/>
+                <filter name="returned" string="Returned" domain="[('state','=','returned')]"/>
+                <filter name="late" string="Late" domain="[('state','=','late')]"/>
+            </search>
+        </field>
+    </record>
+    <!--    -Action- -->
+    <record id="action_library_borrow" model="ir.actions.act_window">
+        <field name="name">Borrow</field>
+        <field name="res_model">library.borrow</field>
+        <field name="search_view_id" ref="view_library_borrow_search"/>
+        <field name="view_mode">list,form,search</field>
+    </record>
+    <!--    menu-->
+    <menuitem id="menu_library_borrow"
+              name="Borrow"
+              parent="menu_library_root"
+              action="action_library_borrow" sequence="3"/>
+</odoo>

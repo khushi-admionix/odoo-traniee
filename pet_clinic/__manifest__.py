@@ -1,5 +1,5 @@
 {
-    'name': "Library_Management",
+    'name': "pet_clinic",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -21,10 +21,12 @@ Long description of module's purpose
 
     # always loaded
     'data': [
+        'wizard/visit_wizard_view.xml',
         'security/ir.model.access.csv',
-        'views/library_book_view.xml',
-        'views/library_member.xml',
-        'views/library_borrow_view.xml',
+        'views/visit_main.xml',
+        'views/pet_main.xml',
+        'views/owner_main.xml',
+        'data/sequences.xml',
     ],
 }
 

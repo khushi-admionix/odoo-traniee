@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Member Tree View -->
+                   <!-- Member Tree View -->
     <record id="view_library_member_list" model="ir.ui.view">
         <field name="name">library.member.tree</field>
         <field name="model">library.member</field>
@@ -12,8 +12,7 @@
             </list>
         </field>
     </record>
-
-    <!-- Member Form View -->
+                   <!-- Member Form View -->
     <record id="view_library_member_form" model="ir.ui.view">
         <field name="name">library.member.form</field>
         <field name="model">library.member</field>
@@ -31,12 +30,23 @@
             </form>
         </field>
     </record>
+                      <!--    <-Search View-->
+    <record id="view_library_member_search" model="ir.ui.view">
+    <field name="name">library.member.search</field>
+    <field name="model">library.member</field>
+    <field name="arch" type="xml">
+            <search>
+                <filter name="member" string="member" domain="[('name','=','member')]"/>
+            </search>
+    </field>
+    </record>
 
-    <!-- Action and Menu -->
+                    <!-- Action and Menu -->
     <record id="action_library_members" model="ir.actions.act_window">
         <field name="name">Members</field>
         <field name="res_model">library.member</field>
-        <field name="view_mode">list,form</field>
+         <field name="search_view_id" ref="view_library_member_search"/>
+        <field name="view_mode">list,form,search</field>
     </record>
 
     <menuitem id="menu_library_members" parent="menu_library_root" action="action_library_members" name="Members" sequence="2"/>
