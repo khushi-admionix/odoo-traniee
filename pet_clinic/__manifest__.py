@@ -21,12 +21,16 @@ Long description of module's purpose
 
     # always loaded
     'data': [
+        'data/pet_cron.xml',
+        'data/sequences.xml',
         'wizard/visit_wizard_view.xml',
         'security/ir.model.access.csv',
         'views/visit_main.xml',
         'views/pet_main.xml',
         'views/owner_main.xml',
-        'data/sequences.xml',
+        'views/pet_appointment_views.xml',
     ],
+    'installable': True,
+    'application': True,
 }
 

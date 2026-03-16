@@ -12,7 +12,13 @@ class PetVisit(models.Model):
     symptoms=fields.Text(string="Symptoms")
     treatment = fields.Text(string="Treatment")
     name=fields.Char(default='New')
-    state=fields.Selection([('draft','Draft'),('done','Done')],string="Status",default='draft')
+    doctor=fields.Char(default='New')
+    state=fields.Selection([('draft','Draft'),('progress','In Treatment'),('done','Done')],string="Status",default='draft')
+    priority = fields.Selection([
+        ('0', 'Low'),
+        ('1', 'Medium'),
+        ('2', 'High'),
+    ])
 
     def action_done(self):
         for rec in self:
@@ -24,6 +30,11 @@ class PetVisit(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('pet.visit')
         return super().create(vals)
 
+    @api.model
+    def auto_close_visits(self):
+        visits=self.search([('visit_date','<',fields.Date.today()),
+                            ('state','=','draft')])
+        visits.write({'state':'done'})
 
     @api.model_create_multi
     def create(self, vals_list):

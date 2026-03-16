@@ -7,6 +7,8 @@
             <list>
                 <field name="pet_id"/>
                 <field name="visit_date"/>
+                <field name="create_date"/>
+                <field name="doctor"/>
             </list>
         </field>
     </record>
@@ -27,11 +29,14 @@
                 <sheet>
                     <group>
                         <field name="pet_id"/>
-                        <field name="visit_date"/>
+                        <field name="visit_date" widget="date"/>
                         <field name="symptoms"/>
                         <field name="treatment"/>
+                        <field name="doctor"/>
+                        <field name="priority" widget="radio"/>
                     </group>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -50,3 +55,5 @@
               action="action_pet_visit"
               sequence="3"/>
 </odoo>
+
+

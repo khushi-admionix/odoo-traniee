@@ -12,17 +12,17 @@ class Pet(models.Model):
     pet_type = fields.Selection([('dog','Dog'),('cat','Cat'),('bird','Bird')], string='Type')
     visit_count = fields.Integer(string="Visit Count", compute="_compute_visit_count")
     visit_ids = fields.One2many('pet.visit', 'pet_id', string="Visits")
+    vaccinated= fields.Boolean()
+
+    def action_mark_senior(self):
+        for rec in self:
+            if rec.age and rec.age > 10:
+                rec.name = rec.name + " (Senior)"
 
     @api.depends('visit_ids')
     def _compute_visit_count(self):
         for pet in self:
             pet.visit_count = len(pet.visit_ids)
-
-   # @api.constrains('pet_name')
-   #  def check_age(self):
-   #       for rec in self:
-   #           if rec.age<0:
-   #               raise ValidationError('Pet Age cannot be negative')
 
     def action_view_visits(self):
         """Return action to open all visits of this pet"""
